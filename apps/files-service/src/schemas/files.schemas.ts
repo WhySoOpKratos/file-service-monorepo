@@ -16,6 +16,9 @@ export class Files {
 
   @Prop({ type: String, required: true })
   uploaded_date: string;
+
+  @Prop({ type: String, required: true })
+  mimetype: string;
 }
 
 export const FileSchema = SchemaFactory.createForClass(Files);

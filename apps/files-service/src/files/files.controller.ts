@@ -92,11 +92,11 @@ export class FilesController {
     if (!userId) {
       throw new UnauthorizedException('you do not have access');
     }
-    const { originalname } = file;
+    const { originalname, mimetype } = file;
     const newPath = await this.renameWithExtension(file);
     console.log(file);
 
-    return this.fileService.saveFile(newPath, originalname, userId);
+    return this.fileService.saveFile(newPath, originalname, userId, mimetype);
   }
 
   @Get('/files')
@@ -124,8 +124,9 @@ export class FilesController {
     if (!userId) {
       throw new UnauthorizedException('you do not have access');
     }
-    const lPath = await this.fileService.getFile(id);
-    res.setHeader('Content-Type', 'image/jpeg');
+    const { lPath, type } = await this.fileService.getFile(id);
+    res.setHeader('Content-Type', type);
+
     const fileStream = fs.createReadStream(path.join(process.cwd(), lPath));
     fileStream.pipe(res);
   }

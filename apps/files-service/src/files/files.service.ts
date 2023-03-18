@@ -9,11 +9,15 @@ export class FilesService {
   constructor(
     @InjectModel(Files.name) private fileModel: Model<FilesDocument>,
   ) {}
+
   async saveFile(
     path: string,
     fileName: string,
     userId: ObjectId,
-  ): Promise<any> {
+    mimetype: string,
+  ) {
+    console.log(mimetype);
+
     try {
       const now: Date = new Date();
       const options: Intl.DateTimeFormatOptions = {
@@ -25,13 +29,14 @@ export class FilesService {
         second: 'numeric',
         timeZoneName: 'short',
       };
-      const uploadedDate: string = now.toLocaleDateString('en-US', options);
+      const uploaded_date: string = now.toLocaleDateString('en-US', options);
 
-      await this.fileModel.create({
+      return await this.fileModel.create({
         path,
         name: fileName,
         userId,
-        uploadedDate,
+        uploaded_date,
+        mimetype,
       });
     } catch (error) {
       console.error(error.message);
@@ -53,8 +58,10 @@ export class FilesService {
     return modifiedUsers;
   }
   async getFile(id: string) {
-    const file = await this.fileModel.findById(id);
-    return file.path;
+    const lPath = (await this.fileModel.findById(id)).path;
+    const type = (await this.fileModel.findById(id)).mimetype;
+
+    return { lPath, type };
   }
   async updateFileName(id: string, body: FileNameDto) {
     const file = await this.fileModel.findById(id);
@@ -73,6 +80,5 @@ export class FilesService {
   }
   async deleteFile(id: string) {
     return this.fileModel.deleteOne({ _id: id });
-    return;
   }
 }
