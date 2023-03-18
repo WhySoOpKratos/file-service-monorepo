@@ -94,7 +94,6 @@ export class FilesController {
     }
     const { originalname, mimetype } = file;
     const newPath = await this.renameWithExtension(file);
-    console.log(file);
 
     return this.fileService.saveFile(newPath, originalname, userId, mimetype);
   }

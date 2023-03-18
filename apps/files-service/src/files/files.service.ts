@@ -16,8 +16,6 @@ export class FilesService {
     userId: ObjectId,
     mimetype: string,
   ) {
-    console.log(mimetype);
-
     try {
       const now: Date = new Date();
       const options: Intl.DateTimeFormatOptions = {
