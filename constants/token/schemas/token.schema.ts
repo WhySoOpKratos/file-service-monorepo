@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { User } from '../../../apps/monorepo-1/src/schemas/user.schema';
+import { User } from '../../../apps/iam-service/src/schemas/user.schema';
 
 export type TokenDocument = HydratedDocument<Token>;
 

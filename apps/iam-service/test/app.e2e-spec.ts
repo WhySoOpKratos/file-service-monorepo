@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { Monorepo1Module } from '../src/monorepo-1.module';
+import { Monorepo1Module } from '../src/iam-service.module';
 
 describe('Monorepo1Controller (e2e)', () => {
   let app: INestApplication;

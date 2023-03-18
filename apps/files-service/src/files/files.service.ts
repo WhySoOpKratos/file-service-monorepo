@@ -1,4 +1,4 @@
-import { Files, FilesDocument } from './../schemas/files.schemas';
+import { Files, FilesDocument } from '../schemas/files.schemas';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
